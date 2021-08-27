@@ -47,5 +47,5 @@ jobs:
         with:
           context: ./server
           push: true
-          tags: ghcr.io/inovex/scrumlr.io/scrumlr-server:latest
+          tags: ghcr.io/inovex/scrumlr.io/scrumlr-parse:latest
           
