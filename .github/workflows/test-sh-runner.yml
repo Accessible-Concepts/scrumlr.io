@@ -1,0 +1,16 @@
+name: self hosted test
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: test job
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        run: | 
+          echo "OK"
+          curl https://registry.kube.com/v2/_catalog
+          docker info
