@@ -127,7 +127,7 @@ jobs:
 
       - name: deploy pr 
         run: |
-          kubectl get po -n scrumlr-$PR_NUMBER  | grep 'Running\|Completed' && helm uninstall scrumlr-$PR_NUMBER -n scrumlr-$PR-NUMBER && kubectl delete ns scrumlr-$PR_NUMBER
+          kubectl get po -n scrumlr-$PR_NUMBER  | grep 'Running\|Completed' && helm uninstall scrumlr-$PR_NUMBER -n scrumlr-$PR_NUMBER && kubectl delete ns scrumlr-$PR_NUMBER
           kubectl wait --for=delete namespace/scrumlr-$PR_NUMBER --timeout=60s
           helm dep up deployment/chart/
           helm install scrumlr-$PR_NUMBER ./deployment/chart -f values-dev.yaml --namespace scrumlr-$PR_NUMBER --create-namespace
