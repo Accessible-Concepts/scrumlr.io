@@ -19,11 +19,14 @@ export const passUsersMiddleware = (stateAPI: MiddlewareAPI<Dispatch<AnyAction>,
     const boardId = stateAPI.getState().board.data!.id;
     API.setRaisedHandStatus(boardId, action.configuration);
   } else if (action.type === ActionType.UpdatedBoard) {
-    const onlineUsers = stateAPI.getState().users.all.filter((user) => user.online === true);
-    if (onlineUsers.length > 1) {
-      const unreadyUsers = onlineUsers.filter((user) => user.ready === false);
-      if (unreadyUsers.length === 1 && unreadyUsers[0].id === Parse.User.current()!.id) {
-        Toast.error(`You are the last one not ready yet, hurry-up!`);
+    const me = stateAPI.getState().users.all.filter((user) => user.id === Parse.User.current()!.id)[0];
+    if (me.notifications) {
+      const onlineUsers = stateAPI.getState().users.all.filter((user) => user.online === true);
+      if (onlineUsers.length > 1) {
+        const unreadyUsers = onlineUsers.filter((user) => user.ready === false);
+        if (unreadyUsers.length === 1 && unreadyUsers[0].id === Parse.User.current()!.id) {
+          Toast.error(`You are the last one not ready yet, hurry-up!`);
+        }
       }
     }
   }

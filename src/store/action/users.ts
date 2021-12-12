@@ -15,6 +15,7 @@ export const UsersActionType = {
   UpdateUser: "@@SCRUMLR/updateUser" as const,
   ChangePermission: "@@SCRUMLR/changePermission" as const,
   EditUserConfiguration: "@@SCRUMLR/editUserConfiguration" as const,
+  toggleNotifications: "@@SCRUMLR/toggleNotifications" as const,
 };
 
 /** Factory or creator class of internal Redux board users object specific actions. */
@@ -103,6 +104,15 @@ export const UsersActionFactory = {
     type: UsersActionType.EditUserConfiguration,
     userConfigurationRequest,
   }),
+  /**
+   * Creates an action that should be dispatch when a user turns Notifications on/off
+   *
+   * @param status togglestatus of Notifications
+   */
+  toggleNotifications: (status: boolean) => ({
+    type: UsersActionType.toggleNotifications,
+    status,
+  }),
 };
 
 export type UsersReduxAction =
@@ -112,4 +122,5 @@ export type UsersReduxAction =
   | ReturnType<typeof UsersActionFactory.setRaisedHandStatus>
   | ReturnType<typeof UsersActionFactory.changePermission>
   | ReturnType<typeof UsersActionFactory.editUserConfiguration>
-  | ReturnType<typeof UsersActionFactory.updateUser>;
+  | ReturnType<typeof UsersActionFactory.updateUser>
+  | ReturnType<typeof UsersActionFactory.toggleNotifications>;

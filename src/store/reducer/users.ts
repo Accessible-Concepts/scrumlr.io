@@ -3,6 +3,7 @@ import Parse from "parse";
 import union from "lodash/union";
 import without from "lodash/without";
 import {ActionType, ReduxAction} from "../action";
+// import { all } from "underscore";
 
 const mapReadyState = (state: Omit<UsersState, "usersMarkedReady">, readyUsers: string[] = []) => ({
   admins: state.admins.map((current) => ({...current, ready: Boolean(readyUsers.find((user) => user === current.id))})),
@@ -117,6 +118,25 @@ export const usersReducer = (state: UsersState = {usersRaisedHands: [], usersMar
       };
 
       return mapRaisedHandState(mapReadyState(newState, state.usersMarkedReady), state.usersRaisedHands);
+    }
+    case ActionType.toggleNotifications: {
+      const newState = {
+        admins: state.admins,
+        basic: state.basic,
+        all: state.all,
+        usersMarkedReady: state.usersMarkedReady,
+        usersRaisedHands: state.usersRaisedHands,
+      };
+      const userId = Parse.User.current()!.id;
+
+      newState.all.map((user) => {
+        if (user.id === userId) {
+          user.notifications = action.status;
+        }
+        return user;
+      });
+
+      return newState;
     }
     default: {
       return state;

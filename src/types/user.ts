@@ -14,6 +14,7 @@ export interface UserClientModel {
   ready: boolean;
   raisedHand: boolean;
   online: boolean;
+  notifications: boolean;
 }
 
 type EditableUserConfiguration = {
@@ -47,4 +48,5 @@ export const mapUserServerToClientModel = (user: UserServerModel, {admin, online
   ready: false,
   raisedHand: false,
   online,
+  notifications: true,
 });

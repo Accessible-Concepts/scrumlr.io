@@ -5,6 +5,7 @@ import {ReactComponent as RightArrowIcon} from "assets/icon-arrow-next.svg";
 import {ReactComponent as LeftArrowIcon} from "assets/icon-arrow-previous.svg";
 import {MenuBars} from "components/MenuBars";
 import {BoardHeader} from "components/BoardHeader";
+import {NotificationToggle} from "components/NotificationToggle";
 import "./Board.scss";
 
 export interface BoardProps {
@@ -174,6 +175,7 @@ export const BoardComponent = ({children, currentUserIsModerator}: BoardProps) =
           <RightArrowIcon className="board__navigation-arrow board__navigation-arrow-next" />
         </button>
       )}
+      <NotificationToggle />
     </>
   );
 };
