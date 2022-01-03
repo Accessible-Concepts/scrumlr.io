@@ -7,6 +7,7 @@ import {AuthRedirect} from "routes/AuthRedirect";
 import {Route} from "react-router";
 import {Homepage} from "./Homepage";
 import {Legal} from "./Legal";
+import {NotFound} from "./NotFound";
 import ScrollToTop from "./ScrollToTop";
 
 const Router = () => (
@@ -35,6 +36,7 @@ const Router = () => (
           </RequireAuthentication>
         }
       />
+      <Route element={<NotFound />} />
     </Routes>
   </BrowserRouter>
 );
